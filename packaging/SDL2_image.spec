@@ -42,7 +42,8 @@ make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make install prefix=$RPM_BUILD_ROOT/%{prefix}
+make install prefix=$RPM_BUILD_ROOT%{prefix} \
+             includedir=$RPM_BUILD_ROOT%{_includedir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -50,15 +51,15 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 #%doc README.txt CHANGES.txt COPYING.txt
-%{prefix}/lib/lib*.so.*
+%{_libdir}/lib*.so.*
 
 %files devel
 %defattr(-,root,root)
-%{prefix}/lib/lib*.a
-%{prefix}/lib/lib*.la
-%{prefix}/lib/lib*.so
-%{prefix}/include/*/*.h
-%{prefix}/lib/pkgconfig/*.pc
+%{_libdir}/lib*.a
+%{_libdir}/lib*.la
+%{_libdir}/lib*.so
+%{_includedir}/*/*.h
+%{_libdir}/pkgconfig/*.pc
 
 %changelog
 * Wed Jan 19 2000 Sam Lantinga 
